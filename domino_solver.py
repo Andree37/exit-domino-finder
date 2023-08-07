@@ -1,42 +1,41 @@
+from args import get_initial_input
 
-pieces = [
-    (6, 4),
-    (5, 1),
-    (1, 2),
-    (6, 6),
-    (5, 3),
-    (2, 4),
-    (4, 3),
-    (2, 6),
-    (3, 2)
-]
+# Puzzle pieces from the domino puzzle.
+pieces = [(6, 4), (5, 1), (1, 2), (6, 6), (5, 3), (2, 4), (4, 3), (2, 6), (3, 2)]
 
 
-def run():
+def run(piece):
     results = []
-    initial_piece = (3, 1)
-    print("Finding paths for input: {}".format(initial_piece))
-    find_pieces([initial_piece], pieces, results)
-    print("Found {} paths".format(len(results)))
-    for r in results:
-        print(r)
+    find_pieces([piece], pieces, results)
+    return results
 
 
-def find_pieces(pieces, remaining_pieces, results):
+def find_pieces(domino, remaining_pieces, results):
     for i, piece in enumerate(remaining_pieces):
         left_pieces = remaining_pieces[:i]
-        right_pieces = remaining_pieces[i + 1:]
+        right_pieces = remaining_pieces[i + 1 :]
 
-        if pieces[-1][1] == piece[0]:  # if last piece's right side is equal to the next piece's left side
-            new_path = pieces + [piece]
+        if (
+            domino[-1][1] == piece[0]
+        ):  # if last piece's right side is equal to the next piece's left side
+            new_path = domino + [piece]
             find_pieces(new_path, left_pieces + right_pieces, results)
-        elif pieces[-1][1] == piece[1]:  # if last piece's right side is equal to the next piece's right side
-            new_path = pieces + [(piece[1], piece[0])]
+        elif (
+            domino[-1][1] == piece[1]
+        ):  # if last piece's right side is equal to the next piece's right side
+            new_path = domino + [(piece[1], piece[0])]
             find_pieces(new_path, left_pieces + right_pieces, results)
 
-    if len(pieces) == 10:
-        results.append(pieces)
+    if len(domino) == 10:
+        results.append(domino)
 
 
 if __name__ == "__main__":
-    run()
+    initial_piece = get_initial_input()
+    print("Finding paths for input: {}".format(initial_piece))
+
+    domino_results = run(initial_piece)
+
+    print("Found {} paths".format(len(domino_results)))
+    for dr in domino_results:
+        print(dr)
