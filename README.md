@@ -40,7 +40,3 @@ If no input is given, the default initial piece will be `(1,3)`.
 
 If you have suggestions for how this script could be improved, or have another suggestion, please open an issue or
 submit a pull request. All contributions are appreciated!
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
