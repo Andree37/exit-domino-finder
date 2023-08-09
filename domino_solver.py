@@ -15,14 +15,12 @@ def find_pieces(domino, remaining_pieces, results):
         left_pieces = remaining_pieces[:i]
         right_pieces = remaining_pieces[i + 1 :]
 
-        if (
-            domino[-1][1] == piece[0]
-        ):  # if last piece's right side is equal to the next piece's left side
+        # if last piece's right side is equal to the next piece's left side
+        if domino[-1][1] == piece[0]:
             new_path = domino + [piece]
             find_pieces(new_path, left_pieces + right_pieces, results)
-        elif (
-            domino[-1][1] == piece[1]
-        ):  # if last piece's right side is equal to the next piece's right side
+        # if last piece's right side is equal to the next piece's right side
+        elif domino[-1][1] == piece[1]:
             new_path = domino + [(piece[1], piece[0])]
             find_pieces(new_path, left_pieces + right_pieces, results)
 
